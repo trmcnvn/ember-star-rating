@@ -1,27 +1,46 @@
-# Ember-stars
+# ember-star-rating
 
-This README outlines the details of collaborating on this Ember addon.
+[![npm version](https://badge.fury.io/js/ember-star-rating.svg)](http://badge.fury.io/js/ember-star-rating)
+[![Build Status](https://travis-ci.org/vevix/ember-star-rating.svg?branch=master)](https://travis-ci.org/vevix/ember-star-rating)
 
-## Installation
+An [ember.js](http://www.emberjs.com) component for star ratings using svgs!
 
-* `git clone <repository-url>` this repository
-* `cd ember-stars`
-* `npm install`
-* `bower install`
+Check out the demo [here](http://vevix.net/ember-star-rating)
 
-## Running
+### Installing the Add-on
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+In your application's directory:
+```bash
+$ ember install ember-star-rating
+```
 
-## Running Tests
+### Using the Add-on
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+Use the component in your Handlebars templates:
 
-## Building
+```hbs
+{{star-rating 2.5}}
+```
 
-* `ember build`
+#### Actions
 
-For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
+```hbs
+{{star-rating
+  onClick=(action ...)
+}}
+```
+
+#### Configuration
+
+```hbs
+{{star-rating
+  numStars=N
+  readOnly=false/true
+  baseColor="#fff"
+  fillColor="#000"
+}}
+```
+
+### License
+
+[MIT](https://github.com/vevix/ember-star-rating/blob/master/LICENSE.md)

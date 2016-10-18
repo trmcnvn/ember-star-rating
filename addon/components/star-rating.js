@@ -115,7 +115,7 @@ const RatingComponent = Component.extend({
   },
 
   _updateStars(rating) {
-    this.$().find('svg').each((index, elem) => {
+    this.$().find('> svg').each((index, elem) => {
       const offset = this._getStarOffset(rating, index + 1);
       this.$(elem).find('stop').eq(0).attr('offset', offset);
     });

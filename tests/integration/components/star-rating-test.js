@@ -8,7 +8,7 @@ moduleForComponent('star-rating', 'Integration | Component | star rating', {
 test('it renders with default options', function(assert) {
   assert.expect(1);
   this.render(hbs`{{star-rating}}`);
-  assert.equal(this.$('svg').length, 5, 'Stars are rendered');
+  assert.equal(this.$('svg').length, 10, 'Stars are rendered');
 });
 
 test('can set N stars', function(assert) {
@@ -18,5 +18,5 @@ test('can set N stars', function(assert) {
       numStars=10
     }}
   `);
-  assert.equal(this.$('svg').length, 10, 'Stars are rendered');
+  assert.equal(this.$('svg').length, 20, 'Stars are rendered');
 });

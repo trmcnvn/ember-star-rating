@@ -38,6 +38,8 @@ Use the component in your Handlebars templates:
   readOnly=false/true
   baseColor="#fff"
   fillColor="#000"
+  width=N
+  height=N
 }}
 ```
 

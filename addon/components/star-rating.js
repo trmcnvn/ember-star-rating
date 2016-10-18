@@ -5,18 +5,21 @@ import layout from '../templates/components/star-rating';
 
 const RatingComponent = Component.extend({
   layout,
+
   fillColor: 'yellow',
   baseColor: 'lightgrey',
   numStars: 5,
   rating: 0,
   readOnly: false,
+  width: 30,
+  height: 30,
+
+  isTouching: false,
 
   init() {
     this._super(...arguments);
-    const stars = [];
-    for (let i = 0; i < get(this, 'numStars'); ++i) {
-      stars.push(0);
-    }
+    const num = get(this, 'numStars');
+    const stars = Array.apply(null, { length: num }).map(() => 1);
     set(this, 'stars', stars);
   },
 
@@ -31,15 +34,47 @@ const RatingComponent = Component.extend({
   },
 
   mouseMove(event) {
+    this._render(event);
+  },
+
+  mouseLeave() {
+    this._reset();
+  },
+
+  touchMove(event) {
+    set(this, 'isTouching', true);
+    this._render(event);
+  },
+
+  touchEnd(event) {
+    if (!get(this, 'isTouching')) {
+      return;
+    }
+    set(this, 'isTouching', false);
+    this._update(event);
+  },
+
+  click(event) {
+    this._update(event);
+  },
+
+  _render(event) {
     if (get(this, 'readOnly')) {
       return;
     }
-    const target = this._getTarget(event.pageX);
+
+    let pageX = event.pageX;
+    if (event.touches !== undefined) {
+      const touch = event.touches[0];
+      pageX = touch.pageX;
+    }
+
+    const target = this._getTarget(pageX);
     const rating = Math.floor(target * 2) / 2;
     this._updateStars(rating);
   },
 
-  mouseLeave() {
+  _reset() {
     if (get(this, 'readOnly')) {
       return;
     }
@@ -47,11 +82,18 @@ const RatingComponent = Component.extend({
     this._updateStars(Math.floor(rating * 2) / 2);
   },
 
-  click(event) {
+  _update(event) {
     if (get(this, 'readOnly')) {
       return;
     }
-    const target = this._getTarget(event.pageX);
+
+    let pageX = event.pageX;
+    if (event.changedTouches !== undefined) {
+      const touch = event.changedTouches[0];
+      pageX = touch.pageX;
+    }
+
+    const target = this._getTarget(pageX);
     const rating = Math.floor(target * 2) / 2;
     get(this, 'onClick')(rating);
   },

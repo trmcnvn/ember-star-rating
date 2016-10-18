@@ -1,21 +1,12 @@
-{{#each stars as |star|}}
-  <svg width={{width}} height={{height}} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+{{#each stars as |star index|}}
+  <svg width={{width}} height={{height}} xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox={{viewBox}}>
     <defs>
-        <linearGradient id="star" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient id="{{elementId}}-star-{{index}}" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop class='star-rating-filled' offset="0%" stop-color={{fillColor}}></stop>
             <stop class='star-rating-base' offset="0%" stop-color={{baseColor}}></stop>
         </linearGradient>
     </defs>
 
-    {{#if hasBlock}}
-      {{yield}}
-    {{else}}
-      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 12.705 512 486.59">
-        <polygon
-          fill="url(#star)" stroke="#000" stroke-width="2px"
-          points="256.814,12.705 317.205,198.566 512.631,198.566 354.529,313.435 414.918,499.295 256.814,384.427 98.713,499.295 159.102,313.435 1,198.566 196.426,198.566 ">
-        </polygon>
-      </svg>
-    {{/if}}
+    <path fill="url(#{{elementId}}-star-{{index}})" d={{svgPath}}></path>
   </svg>
 {{/each}}

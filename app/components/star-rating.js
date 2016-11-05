@@ -1,1 +1,1 @@
-export { default } from 'ember-stars/components/star-rating';
+export { default } from 'ember-star-rating/components/star-rating';

@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-stars'
+  name: 'ember-star-rating'
 };

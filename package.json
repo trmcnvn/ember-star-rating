@@ -1,6 +1,6 @@
 {
   "name": "ember-star-rating",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Star ratings for emberjs.",
   "directories": {
     "doc": "doc",
@@ -36,6 +36,7 @@
     "ember-data": "^2.8.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
+    "ember-invoke-action": "1.4.0",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
     "ember-style-bindings": "0.0.1",

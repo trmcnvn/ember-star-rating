@@ -109,7 +109,7 @@ const RatingComponent = Component.extend({
       const offset = this._getStarOffset(rating, index + 1);
       this.$(elem).find('stop').eq(0).attr('offset', offset);
       const klass = offset === '100%' ? 'star-full' : (offset === '50%' ? 'star-half' : 'star-empty');
-      this.$(elem).removeClass().addClass(klass);
+      this.$(elem).attr('class', '').attr('class', klass);
     });
   }
 });

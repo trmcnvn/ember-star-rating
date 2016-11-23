@@ -20,3 +20,12 @@ test('can set N stars', function(assert) {
   `);
   assert.equal(this.$('svg').length, 10, 'Stars are rendered');
 });
+
+test('stars are rerendered if rating is changed', function(assert) {
+  assert.expect(2);
+  this.set('rating', 3);
+  this.render(hbs`{{star-rating rating readOnly=true}}`);
+  assert.equal(this.$('.star-full').length, 3);
+  this.set('rating', 5);
+  assert.equal(this.$('.star-full').length, 5);
+});

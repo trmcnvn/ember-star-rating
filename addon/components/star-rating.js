@@ -25,21 +25,23 @@ const RatingComponent = Component.extend({
     set(this, 'stars', stars);
   },
 
-  didInsertElement() {
-    this._super(...arguments);
-    this.$().css('display', 'inline-block');
-    if (!get(this, 'readOnly')) {
-      this.$().css('cursor', 'pointer');
-    }
-    const rating = get(this, 'rating');
-    this._updateStars(rating);
-  },
-
   didReceiveAttrs() {
     this._super(...arguments);
     scheduleOnce('afterRender', () => this.$().removeClass('has-rating'));
     if (get(this, 'rating') > 0) {
       scheduleOnce('afterRender', () => this.$().addClass('has-rating'));
+    }
+    scheduleOnce('afterRender', () => {
+      const rating = get(this, 'rating');
+      this._updateStars(rating);
+    });
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+    this.$().css('display', 'inline-block');
+    if (get(this, 'readOnly') === false) {
+      this.$().css('cursor', 'pointer');
     }
   },
 

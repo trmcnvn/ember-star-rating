@@ -11,6 +11,7 @@ const RatingComponent = Component.extend({
   fillColor: 'yellow',
   baseColor: 'lightgrey',
   numStars: 5,
+  anyPercent: false,
   rating: 0,
   readOnly: false,
   width: 26,
@@ -108,7 +109,12 @@ const RatingComponent = Component.extend({
 
   _updateStars(rating) {
     this.$().find('> svg').each((index, elem) => {
-      const offset = this._getStarOffset(rating, index + 1);
+      let offset = 0;
+      if (get(this, 'anyPercent') === true) {
+        offset = (rating - index) > 0 ? ((rating - index) > 1 ? '100%' : `${((rating - index) * 100).toFixed(0)}%`) : '0%';
+      } else {
+        offset = this._getStarOffset(rating, index + 1);
+      }
       this.$(elem).find('stop').eq(0).attr('offset', offset);
       const klass = offset === '100%' ? 'star-full' : (offset === '50%' ? 'star-half' : 'star-empty');
       this.$(elem).attr('class', '').attr('class', klass);

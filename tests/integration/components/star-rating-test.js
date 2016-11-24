@@ -31,7 +31,8 @@ test('stars are rerendered if rating is changed', function(assert) {
 });
 
 test('can support any percentage fill', function(assert) {
-  assert.expect(1);
-  this.render(hbs`{{star-rating 3.7 anyPercent=true}}`);
-  assert.equal(this.$('stop[offset="70%"]').length, 1);
+  assert.expect(2);
+  this.render(hbs`{{star-rating 3.28 anyPercent=true}}`);
+  assert.equal(this.$('stop[offset="28%"]').length, 1);
+  assert.equal(this.$('.star-variable').length, 1);
 });

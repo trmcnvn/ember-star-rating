@@ -36,7 +36,6 @@
     "ember-data": "^2.8.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
-    "ember-invoke-action": "1.4.0",
     "ember-load-initializers": "^0.5.1",
     "ember-resolver": "^2.0.3",
     "ember-style-bindings": "0.0.1",
@@ -49,7 +48,8 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
-    "ember-cli-htmlbars": "^1.1.0"
+    "ember-cli-htmlbars": "^1.1.0",
+    "ember-invoke-action": "1.4.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

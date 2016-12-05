@@ -1,6 +1,6 @@
 {
   "name": "ember-star-rating",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Star ratings for emberjs.",
   "directories": {
     "doc": "doc",

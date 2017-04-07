@@ -67,6 +67,7 @@ const RatingComponent = Component.extend({
     const rating = Math.floor(target * 2) / 2;
     this._updateStars(rating);
     this.$().removeClass('has-rating').addClass('is-rating');
+    invokeAction(this, 'onHover', rating);
   },
 
   _reset() {

@@ -59,15 +59,18 @@ const RatingComponent = Component.extend({
   },
 
   mouseMove(event) {
-    this._render(event);
+    const rating = this._render(event);
+    invokeAction(this, 'onHover', rating || 0);
   },
 
   mouseLeave() {
-    this._reset();
+    const rating = this._reset();
+    invokeAction(this, 'onHover', rating || 0);
   },
 
   click(event) {
-    this._update(event);
+    const rating = this._update(event);
+    invokeAction(this, 'onClick', rating || 0);
   },
 
   _render(event) {
@@ -79,6 +82,7 @@ const RatingComponent = Component.extend({
     const rating = Math.floor(target * 2) / 2;
     this._updateStars(rating);
     this.$().removeClass('has-rating').addClass('is-rating');
+    return rating;
   },
 
   _reset() {
@@ -91,6 +95,7 @@ const RatingComponent = Component.extend({
     if (rating > 0) {
       this.$().addClass('has-rating');
     }
+    return rating;
   },
 
   _update(event) {
@@ -100,7 +105,7 @@ const RatingComponent = Component.extend({
     const pageX = event.pageX;
     const target = this._getTarget(pageX);
     const rating = Math.floor(target * 2) / 2;
-    invokeAction(this, 'onClick', rating);
+    return rating;
   },
 
   _getTarget(x) {

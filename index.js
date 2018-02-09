@@ -2,5 +2,9 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-star-rating'
+  name: 'ember-star-rating',
+
+  isDevelopingAddon() {
+    return true;
+  }
 };

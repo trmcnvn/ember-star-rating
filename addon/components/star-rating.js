@@ -1,10 +1,8 @@
-import Component from 'ember-component';
-import computed from 'ember-computed';
-import get from 'ember-metal/get';
-import set from 'ember-metal/set';
-import {scheduleOnce} from 'ember-runloop';
-import {invokeAction} from 'ember-invoke-action';
-import {htmlSafe} from 'ember-string';
+import Component from '@ember/component';
+import { computed, get, set } from '@ember/object';
+import { scheduleOnce } from '@ember/runloop';
+import { htmlSafe } from '@ember/string';
+import { invokeAction } from 'ember-invoke-action';
 import layout from '../templates/components/star-rating';
 
 const RatingComponent = Component.extend({

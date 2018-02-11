@@ -1,38 +1,36 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('star-rating', 'Integration | Component | star rating', {
-  integration: true
-});
+module('star-rating', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('it renders with default options', function(assert) {
-  assert.expect(1);
-  this.render(hbs`{{star-rating}}`);
-  assert.equal(this.$('svg').length, 5, 'Stars are rendered');
-});
+  test('it renders with default options', async function(assert) {
+    assert.expect(1);
+    await render(hbs`{{star-rating}}`);
+    assert.equal(this.element.querySelectorAll('svg').length, 5);
+  });
 
-test('can set N stars', function(assert) {
-  assert.expect(1);
-  this.render(hbs`
-    {{star-rating
-      numStars=10
-    }}
-  `);
-  assert.equal(this.$('svg').length, 10, 'Stars are rendered');
-});
+  test('can set `N` stars', async function(assert) {
+    assert.expect(1);
+    await render(hbs`{{star-rating numStars=10}}`);
+    assert.equal(this.element.querySelectorAll('svg').length, 10);
+  });
 
-test('stars are rerendered if rating is changed', function(assert) {
-  assert.expect(2);
-  this.set('rating', 3);
-  this.render(hbs`{{star-rating rating}}`);
-  assert.equal(this.$('.star-full').length, 3);
-  this.set('rating', 5);
-  assert.equal(this.$('.star-full').length, 5);
-});
+  test('stars are updated if rating has changed', async function(assert) {
+    assert.expect(2);
+    this.set('rating', 3);
+    await render(hbs`{{star-rating rating}}`);
+    assert.equal(this.element.querySelectorAll('.star-full').length, 3);
+    this.set('rating', 5);
+    assert.equal(this.element.querySelectorAll('.star-full').length, 5);
+  });
 
-test('can support any percentage fill', function(assert) {
-  assert.expect(2);
-  this.render(hbs`{{star-rating 3.28 anyPercent=true}}`);
-  assert.equal(this.$('stop[offset="28%"]').length, 1);
-  assert.equal(this.$('.star-variable').length, 1);
+  test('can support any percentage', async function(assert) {
+    assert.expect(2);
+    await render(hbs`{{star-rating 3.28 anyPercent=true}}`);
+    assert.equal(this.element.querySelectorAll('stop[offset="28%"]').length, 1);
+    assert.equal(this.element.querySelectorAll('.star-variable').length, 1);
+  });
 });

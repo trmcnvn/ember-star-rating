@@ -1,17 +1,19 @@
-import Ember from 'ember';
+import Controller from '@ember/controller';
+import { set } from '@ember/object';
+import { later } from '@ember/runloop';
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   rating: 3.5,
   updateableRating: 3,
 
   init() {
     this._super(...arguments);
-    Ember.run.later(() => this.set('updateableRating', 5), 3000);
+    later(() => set(this, 'updateableRating', 5), 3000);
   },
 
   actions: {
     setRating(rating) {
-      Ember.set(this, 'rating', rating);
+      set(this, 'rating', rating);
       window.alert(`Rating set to ${rating}`);
     }
   }

@@ -3,7 +3,7 @@ import { computed, get, set } from '@ember/object';
 import { scheduleOnce } from '@ember/runloop';
 import { htmlSafe } from '@ember/string';
 import layout from '../templates/components/star-rating';
-
+import { getOwner } from '@ember/application';
 const RatingComponent = Component.extend({
   layout,
 

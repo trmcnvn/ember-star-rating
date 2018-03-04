@@ -22,7 +22,10 @@ const RatingComponent = Component.extend({
 
   onHover: () => {},
   onClick: () => {},
-
+  fastboot: Ember.computed(function () {
+    let owner = getOwner(this);
+    return owner.lookup('service:fastboot');
+  }),
   style: computed('width', 'height', function () {
     var style = '';
     if (get(this, 'width')) {
@@ -43,6 +46,7 @@ const RatingComponent = Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
+    if (get(this, 'fastboot.isFastBoot')) return;
     scheduleOnce('afterRender', () => this.$().removeClass('has-rating'));
     if (get(this, 'rating') > 0) {
       scheduleOnce('afterRender', () => this.$().addClass('has-rating'));

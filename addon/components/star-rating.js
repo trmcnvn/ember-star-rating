@@ -22,7 +22,7 @@ const RatingComponent = Component.extend({
 
   onHover: () => {},
   onClick: () => {},
-  fastboot: Ember.computed(function () {
+  fastboot: computed(function () {
     let owner = getOwner(this);
     return owner.lookup('service:fastboot');
   }),

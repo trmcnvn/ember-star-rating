@@ -1,0 +1,13 @@
+.star-rating {
+  display: inline-block;
+}
+
+.star-rating__item {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.star-rating--read-only .star-rating__item {
+  cursor: default;
+}

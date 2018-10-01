@@ -4,6 +4,7 @@ import { scheduleOnce } from '@ember/runloop';
 import { htmlSafe } from '@ember/string';
 import layout from '../templates/components/star-rating';
 import { getOwner } from '@ember/application';
+import $ from 'jquery';
 const RatingComponent = Component.extend({
   layout,
 
@@ -151,7 +152,6 @@ const RatingComponent = Component.extend({
   _updateStars(rating) {
     this.$().find('> svg').each((index, elem) => {
       let offset = 0;
-
       if (get(this, 'anyPercent') === true) {
         offset = (rating - index) > 0 ? ((rating - index) > 1 ? '100%' : `${((rating - index) * 100).toFixed(0)}%`) : '0%';
       } else {
@@ -162,12 +162,12 @@ const RatingComponent = Component.extend({
         rating = Math.ceil(rating);
       }
 
-      this.$(elem).find('stop').eq(0).attr('offset', offset);
+      $(elem).find('stop').eq(0).attr('offset', offset);
       let klass = offset === '100%' ? 'star-full' : (offset === '50%' ? 'star-half' : 'star-empty');
       if (get(this, 'anyPercent') === true && klass === 'star-empty' && offset !== '0%') {
         klass = 'star-variable';
       }
-      this.$(elem).attr('class', '').attr('class', klass);
+      $(elem).attr('class', '').attr('class', klass);
     });
   }
 });

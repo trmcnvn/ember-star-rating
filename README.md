@@ -1,7 +1,7 @@
 # ember-star-rating
 
 [![npm version](https://badge.fury.io/js/ember-star-rating.svg)](http://badge.fury.io/js/ember-star-rating)
-[![Build Status](https://travis-ci.org/vevix/ember-star-rating.svg?branch=master)](https://travis-ci.org/vevix/ember-star-rating)
+[![Build Status](https://travis-ci.org/trmcnvn/ember-star-rating.svg?branch=master)](https://travis-ci.org/trmcnvn/ember-star-rating)
 
 An [ember.js](http://www.emberjs.com) component for star ratings using svgs!
 
@@ -45,4 +45,4 @@ Use the component in your Handlebars templates:
 
 ### License
 
-[MIT](https://github.com/vevix/ember-star-rating/blob/master/LICENSE.md)
+[MIT](https://github.com/trmcnvn/ember-star-rating/blob/master/LICENSE.md)

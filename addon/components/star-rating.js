@@ -98,7 +98,7 @@ const RatingComponent = Component.extend({
       return;
     }
     const rating = get(this, 'rating');
-    this._updateStars(Math.floor(rating * 2) / 2);
+    this._updateStars(rating);
     this.$().removeClass('is-rating');
     if (rating > 0) {
       this.$().addClass('has-rating');

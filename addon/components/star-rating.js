@@ -23,6 +23,7 @@ const RatingComponent = Component.extend({
 
   onHover: () => {},
   onClick: () => {},
+
   fastboot: computed(function () {
     let owner = getOwner(this);
     return owner.lookup('service:fastboot');
@@ -61,6 +62,7 @@ const RatingComponent = Component.extend({
   didInsertElement() {
     this._super(...arguments);
     this.$().css('display', 'inline-block');
+    this.$().css('user-select', 'none');
     if (get(this, 'readOnly') === false) {
       this.$().css('cursor', 'pointer');
     }
@@ -78,6 +80,21 @@ const RatingComponent = Component.extend({
 
   click(event) {
     const rating = this._update(event);
+    get(this, 'onClick')(rating || 0);
+  },
+
+  touchStart(event) {
+    this._render(event);
+  },
+
+  touchMove(event) {
+    this._render(event);
+  },
+
+  touchEnd(event) {
+    event.preventDefault();
+    const rating = this._update(event);
+    this._render(event);
     get(this, 'onClick')(rating || 0);
   },
 
@@ -123,7 +140,12 @@ const RatingComponent = Component.extend({
 
   _getTarget(x) {
     const numStars = get(this, 'numStars');
-    const numStarsFilled = (numStars * (x - this.$().offset().left) / this.$().width() + 0.5);
+    let numStarsFilled = (numStars * (x - this.$().offset().left) / this.$().width() + 0.5);
+
+    if (numStarsFilled > numStars) {
+      numStarsFilled = numStars;
+    }
+
     if (get(this, 'useHalfStars')) {
       return numStarsFilled;
     }

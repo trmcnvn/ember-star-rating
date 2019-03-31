@@ -5,11 +5,14 @@
 
 An [ember.js](http://www.emberjs.com) component for star ratings using svgs!
 
+- This addon is jQuery dependent at the moment.
+
 Check out the demo [here](http://vevix.net/ember-star-rating)
 
 ### Installing the Add-on
 
 In your application's directory:
+
 ```bash
 $ ember install ember-star-rating
 ```

@@ -140,7 +140,6 @@ const StarRating = Component.extend({
     const numStars = get(this, 'numStars');
     const offsetLeft = this.element.getBoundingClientRect().left;
     const elementWidth = parseInt(getComputedStyle(this.element).width, 10);
-    console.log(offsetLeft, elementWidth);
     let numStarsFilled = (numStars * (x - offsetLeft)) / elementWidth + 0.5;
     if (numStarsFilled > numStars) {
       numStarsFilled = numStars;

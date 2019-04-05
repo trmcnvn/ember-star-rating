@@ -13,6 +13,7 @@
 /.eslintrc.js
 /.gitignore
 /.watchmanconfig
+/.template-lintrc.js
 /.travis.yml
 /bower.json
 /config/ember-try.js
@@ -20,6 +21,7 @@
 /testem.js
 /tests/
 /yarn.lock
+/yarn-error.log
 .gitkeep
 
 # ember-try

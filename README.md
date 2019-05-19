@@ -2,6 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/ember-star-rating.svg)](http://badge.fury.io/js/ember-star-rating)
 [![Build Status](https://travis-ci.org/trmcnvn/ember-star-rating.svg?branch=master)](https://travis-ci.org/trmcnvn/ember-star-rating)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftrmcnvn%2Fember-star-rating.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftrmcnvn%2Fember-star-rating?ref=badge_shield)
 
 [Ember.js](http://www.emberjs.com) component for ratings.
 
@@ -51,3 +52,6 @@ or with positional params.
 ### License
 
 [See LICENSE.md](https://github.com/trmcnvn/ember-star-rating/blob/master/LICENSE.md)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftrmcnvn%2Fember-star-rating.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftrmcnvn%2Fember-star-rating?ref=badge_large)

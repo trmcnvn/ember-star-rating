@@ -93,16 +93,15 @@ const StarRating = Component.extend({
 
   touchEnd(event) {
     event.preventDefault();
-    const rating = this._update(event);
-    this._render(event);
-    get(this, 'onClick')(rating || 0);
+    this.click(event);
   },
 
   // Rating Functions
-  _render({ pageX }) {
+  _render(event) {
     if (get(this, 'readOnly')) {
       return;
     }
+    const pageX = this._getPositionFromEvent(event);
     const target = this._getTarget(pageX);
     const rating = Math.floor(target * 2) / 2;
     this._updateStars(rating);
@@ -124,7 +123,8 @@ const StarRating = Component.extend({
     return rating;
   },
 
-  _update({ pageX }) {
+  _update(event) {
+    const pageX = this._getPositionFromEvent(event);
     if (get(this, 'readOnly')) {
       return;
     }
@@ -134,6 +134,13 @@ const StarRating = Component.extend({
       return Math.ceil(rating);
     }
     return rating;
+  },
+
+  _getPositionFromEvent(event) {
+    if (event instanceof TouchEvent && event.changedTouches[0]) {
+      return event.changedTouches[0].pageX;
+    }
+    return event.pageX;
   },
 
   _getTarget(x) {
@@ -169,12 +176,7 @@ const StarRating = Component.extend({
       const element = elements[index];
       let offset = 0;
       if (get(this, 'anyPercent')) {
-        offset =
-          rating - index > 0
-            ? rating - index > 1
-              ? '100%'
-              : `${((rating - index) * 100).toFixed(0)}%`
-            : '0%';
+        offset = rating - index > 0 ? (rating - index > 1 ? '100%' : `${((rating - index) * 100).toFixed(0)}%`) : '0%';
       } else {
         offset = this._getOffset(rating, index + 1);
       }
@@ -185,17 +187,8 @@ const StarRating = Component.extend({
 
       const stopElement = element.getElementsByTagName('stop')[0];
       stopElement.setAttribute('offset', offset);
-      let className =
-        offset === '100%'
-          ? 'star-full'
-          : offset === '50%'
-          ? 'star-half'
-          : 'star-empty';
-      if (
-        get(this, 'anyPercent') &&
-        className === 'star-empty' &&
-        offset !== '0%'
-      ) {
+      let className = offset === '100%' ? 'star-full' : offset === '50%' ? 'star-half' : 'star-empty';
+      if (get(this, 'anyPercent') && className === 'star-empty' && offset !== '0%') {
         className = 'star-variable';
       }
       element.setAttribute('class', className);

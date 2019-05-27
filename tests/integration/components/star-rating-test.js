@@ -1,5 +1,6 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
+import { tap } from '@ember/test-helpers';
 import { render } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
@@ -7,30 +8,37 @@ module('star-rating', function(hooks) {
   setupRenderingTest(hooks);
 
   test('it renders with default options', async function(assert) {
-    assert.expect(1);
     await render(hbs`{{star-rating}}`);
-    assert.equal(this.element.querySelectorAll('svg').length, 5);
+    assert.dom('svg').exists({ count: 5 });
   });
 
-  test('can set `N` stars', async function(assert) {
-    assert.expect(1);
+  test('variable amount of stars', async function(assert) {
     await render(hbs`{{star-rating numStars=10}}`);
-    assert.equal(this.element.querySelectorAll('svg').length, 10);
+    assert.dom('svg').exists({ count: 10 });
   });
 
-  test('stars are updated if rating has changed', async function(assert) {
-    assert.expect(2);
+  test('updates if property is changed', async function(assert) {
     this.set('rating', 3);
     await render(hbs`{{star-rating rating}}`);
-    assert.equal(this.element.querySelectorAll('.star-full').length, 3);
+    assert.dom('.star-full').exists({ count: 3 });
+
     this.set('rating', 5);
-    assert.equal(this.element.querySelectorAll('.star-full').length, 5);
+    assert.dom('.star-full').exists({ count: 5 });
   });
 
-  test('can support any percentage', async function(assert) {
-    assert.expect(2);
+  test('support variable rating amount', async function(assert) {
     await render(hbs`{{star-rating 3.28 anyPercent=true}}`);
-    assert.equal(this.element.querySelectorAll('stop[offset="28%"]').length, 1);
-    assert.equal(this.element.querySelectorAll('.star-variable').length, 1);
+    assert.dom('stop[offset="28%"]').exists();
+    assert.dom('.star-variable').exists();
+  });
+
+  test('touch events', async function(assert) {
+    this.set('rating', 0);
+    this.set('onClick', () => this.set('rating', 3));
+    await render(hbs`{{star-rating rating=rating onClick=onClick}}`);
+    assert.dom('.star-empty').exists({ count: 5 });
+
+    await tap(this.element.querySelector('svg'));
+    assert.dom('.star-full').exists({ count: 3 });
   });
 });

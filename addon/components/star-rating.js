@@ -137,7 +137,7 @@ const StarRating = Component.extend({
   },
 
   _getPositionFromEvent(event) {
-    if (event instanceof TouchEvent && event.changedTouches[0]) {
+    if (window.TouchEvent && event instanceof TouchEvent && event.changedTouches[0]) {
       return event.changedTouches[0].pageX;
     }
     return event.pageX;

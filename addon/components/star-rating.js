@@ -33,7 +33,7 @@ const StarRating = Component.extend({
   baseColor: 'lightgrey',
 
   // Determine if we are invoked under a FastBoot process
-  isFastBoot: computed(function() {
+  fastbootService: computed(function() {
     return getOwner(this).lookup('service:fastboot');
   }),
 
@@ -58,7 +58,7 @@ const StarRating = Component.extend({
 
   didReceiveAttrs() {
     this._super(...arguments);
-    if (get(this, 'isFastBoot')) {
+    if (get(this, 'fastbootService.isFastBoot')) {
       return;
     }
     scheduleOnce('afterRender', () => {

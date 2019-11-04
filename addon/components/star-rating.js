@@ -61,37 +61,60 @@ const StarRating = Component.extend({
     if (get(this, 'fastbootService.isFastBoot')) {
       return;
     }
-    scheduleOnce('afterRender', () => {
-      const rating = get(this, 'rating');
-      this._updateStars(rating);
-    });
+    scheduleOnce('afterRender', this, this._afterRender);
+  },
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    this._handleMouseMove = this.handleMouseMove.bind(this);
+    this._handleMouseLeave = this.handleMouseLeave.bind(this);
+    this._handleTouchStart = this.handleTouchStart.bind(this);
+    this._handleTouchMove = this.handleTouchMove.bind(this);
+    this._handleTouchEnd = this.handleTouchEnd.bind(this);
+
+    this.element.addEventListener('mousemove', this._handleMouseMove);
+    this.element.addEventListener('mouseleave', this._handleMouseLeave);
+    this.element.addEventListener('touchstart', this._handleTouchStart);
+    this.element.addEventListener('touchmove', this._handleTouchMove);
+    this.element.addEventListener('touchend', this._handleTouchEnd);
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.element.removeEventListener('mousemove', this._handleMouseMove);
+    this.element.removeEventListener('mouseleave', this._handleMouseLeave);
+    this.element.removeEventListener('touchstart', this._handleTouchStart);
+    this.element.removeEventListener('touchmove', this._handleTouchMove);
+    this.element.removeEventListener('touchend', this._handleTouchEnd);
   },
 
   // Component Events
-  mouseMove(event) {
-    const rating = this._render(event);
-    get(this, 'onHover')(rating || 0);
-  },
-
-  mouseLeave(event) {
-    const rating = this._reset(event);
-    get(this, 'onHover')(rating || 0);
-  },
-
   click(event) {
     const rating = this._update(event);
     get(this, 'onClick')(rating || 0);
   },
 
-  touchStart(event) {
+  // The following events are deprecated so they must be listened on manually
+  handleMouseMove(event) {
+    const rating = this._render(event);
+    get(this, 'onHover')(rating || 0);
+  },
+
+  handleMouseLeave(event) {
+    const rating = this._reset(event);
+    get(this, 'onHover')(rating || 0);
+  },
+
+  handleTouchStart(event) {
     this._render(event);
   },
 
-  touchMove(event) {
+  handleTouchMove(event) {
     this._render(event);
   },
 
-  touchEnd(event) {
+  handleTouchEnd(event) {
     event.preventDefault();
     this.click(event);
   },
@@ -193,6 +216,11 @@ const StarRating = Component.extend({
       }
       element.setAttribute('class', className);
     }
+  },
+
+  _afterRender() {
+    const rating = get(this, 'rating');
+    this._updateStars(rating);
   }
 });
 
